@@ -1,12 +1,12 @@
-importance: 5
+inportância: 5
 
 ---
 
-# Working with prototype
+# Trabalhando com protótipos
 
-Here's the code that creates a pair of objects, then modifies them.
+Aqui está o código que cria um par de objetos, então os modifica.
 
-Which values are shown in the process?
+Quais valores são exibiros no processo?
 
 ```js
 let animal = {
@@ -28,4 +28,4 @@ delete animal.jumps;
 alert( rabbit.jumps ); // ? (3)
 ```
 
-There should be 3 answers.
+Deve haver 3 respostas.
