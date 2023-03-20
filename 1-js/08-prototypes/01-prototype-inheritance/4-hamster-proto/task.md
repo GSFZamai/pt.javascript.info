@@ -1,12 +1,12 @@
-importance: 5
+importância: 5
 
 ---
 
-# Why are both hamsters full?
+# Por que ambos os hamters estão *full* (cheios)?
 
-We have two hamsters: `speedy` and `lazy` inheriting from the general `hamster` object. 
+Nós temos dois hamsters: `speedy` e `lazy` herdando do objeto genérico `hamster`. 
 
-When we feed one of them, the other one is also full. Why? How can we fix it?
+Quando alimentamos um eles, o outro também está *full* (cheio). Por quê? Como podemos arrumar isso?
 
 ```js run
 let hamster = {
@@ -25,11 +25,11 @@ let lazy = {
   __proto__: hamster
 };
 
-// This one found the food
+// Esse encontrou a comida
 speedy.eat("apple");
 alert( speedy.stomach ); // apple
 
-// This one also has it, why? fix please.
+// E esse também a possui, por quê? Arrume por favor.
 alert( lazy.stomach ); // apple
 ```
 
