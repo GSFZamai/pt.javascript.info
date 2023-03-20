@@ -1,18 +1,18 @@
-Let's look carefully at what's going on in the call `speedy.eat("apple")`.
+Vamos observar cuidadosamente no que está acontecendo ao invocar `speedy.eat("apple")`.
 
-1. The method `speedy.eat` is found in the prototype (`=hamster`), then executed with `this=speedy` (the object before the dot).
+1. O método `speedy.eat` é encontrado no protótipo (`=hamster`), então executado com `this=speedy` (o objeto antes do ponto).
 
-2. Then `this.stomach.push()` needs to find `stomach` property and call `push` on it. It looks for `stomach` in `this` (`=speedy`), but nothing found.
+2. Então `this.stomach.push()` precisa encontrar a propriedade `stomach` e invocar `push` nele. Ele busca por `stomach` em `this` (`=speedy`), mas nada é encontrado.
 
-3. Then it follows the prototype chain and finds `stomach` in `hamster`.
+3. Então ele segue a cadeia do protótipo e encontra `stomach` em `hamster`.
 
-4. Then it calls `push` on it, adding the food into *the stomach of the prototype*.
+4. Então ele invoca `push` nele, adicionando a comida no *the stomach of the prototype* (estômago do protótipo).
 
-So all hamsters share a single stomach!
+Portnanto todos os hamsters compartilham um único *stomach* (estômago)!
 
-Both for `lazy.stomach.push(...)` and `speedy.stomach.push()`, the property `stomach` is found in the prototype (as it's not in the object itself), then the new data is pushed into it.
+Ambos para `lazy.stomach.push(...)` e `speedy.stomach.push()`, a propriedade `stomach` é encontrada no protótipo (como não está no próprio objeto), então a nova informação é inserida nele.
 
-Please note that such thing doesn't happen in case of a simple assignment `this.stomach=`:
+Por favor note que que tal situção não ocorre em caso de uma simples atribuição `this.stomach=`:
 
 ```js run
 let hamster = {
@@ -20,7 +20,7 @@ let hamster = {
 
   eat(food) {
 *!*
-    // assign to this.stomach instead of this.stomach.push
+    // atribuir a this.stomach em vez de this.stomach.push
     this.stomach = [food];
 */!*
   }
@@ -34,17 +34,17 @@ let lazy = {
   __proto__: hamster
 };
 
-// Speedy one found the food
+// Speedy encontrou a comida
 speedy.eat("apple");
 alert( speedy.stomach ); // apple
 
-// Lazy one's stomach is empty
-alert( lazy.stomach ); // <nothing>
+// O *stomach* estômago do Lazy está vazio
+alert( lazy.stomach ); // <nada>
 ```
 
-Now all works fine, because `this.stomach=` does not perform a lookup of `stomach`. The value is written directly into `this` object.
+Agora tudo funciona bem, porque `this.stomach=` não executa a busca de `stomach`. O valor é escrito diretamente no objeto `this`.
 
-Also we can totally avoid the problem by making sure that each hamster has their own stomach:
+Também podemos evitar totalmnte o problema ao garantir que cara hamtser tenha seu próprio *stomach* (estômago):
 
 ```js run
 let hamster = {
@@ -69,12 +69,12 @@ let lazy = {
 */!*
 };
 
-// Speedy one found the food
+// Speedy encontrou a comida
 speedy.eat("apple");
 alert( speedy.stomach ); // apple
 
-// Lazy one's stomach is empty
-alert( lazy.stomach ); // <nothing>
+// O *stomach* etômago de Lazy está vazio
+alert( lazy.stomach ); // <nada>
 ```
 
-As a common solution, all properties that describe the state of a particular object, like `stomach` above, should be written into that object. That prevents such problems.
+Como uma solução comum, todas as propriedades que descrevem o estado de um objeto em particular, como `stomach` acima, deve ser escrito naquele objeto. Isso previne tais problemas.
